@@ -1,0 +1,122 @@
+CREATE DATABASE appCursos;
+USE appCursos;
+
+CREATE TABLE CURSOSOFERTADOS
+(
+	IdCursoOfertado INT NOT NULL AUTO_INCREMENT,
+    Nombre TEXT,
+    Descripcion TEXT,
+    CostoCreditos INT,
+    DuracionSemanas INT,
+    PRIMARY KEY (IdCursoOfertado)
+);
+
+CREATE TABLE INSTRUCTORES
+(
+    IdInstructor INT NOT NULL AUTO_INCREMENT,
+    NDocumento INT,
+    Nombre VARCHAR(20),
+    PrimerApellido VARCHAR(20),
+    SegundoApellido  VARCHAR(20),
+    Telefono INT,
+    CorreoElectronico VARCHAR(100),
+    DireccionCasa VARCHAR(20),
+    PRIMARY KEY (IdInstructor)
+);
+
+
+CREATE TABLE CURSOSDICTADOS
+(
+    IdCursoDictado INT NOT NULL AUTO_INCREMENT,
+    IdProfesorAsignado INT,
+    IdCursosOfertados INT,
+	FechaInicio DATE,
+    FechaFin DATE,
+    HoraInicio INT,
+    HoraFin INT,
+    PRIMARY KEY (IdCursoDictado),
+    FOREIGN KEY(IdProfesorAsignado) REFERENCES INSTRUCTORES(IdInstructor),
+    FOREIGN KEY(IdCursosOfertados) REFERENCES CURSOSOFERTADOS(IdCursoOfertado)
+);
+
+CREATE TABLE MATRICULAS
+(
+	IdMatricula INT NOT NULL AUTO_INCREMENT,
+    IdCursoDictado INT,
+    FechaMatricula DATE,
+    PagoMatricula DATE,
+    FormaPagoMatricula VARCHAR(20),
+    PRIMARY KEY (IdMatricula),
+    FOREIGN KEY(IdCursoDictado) REFERENCES CURSOSDICTADOS(IdCursoDictado)
+);
+
+CREATE TABLE ESTUDIANTES
+(
+	IdEstudiante INT NOT NULL AUTO_INCREMENT,
+    IdMatricula INT,
+    TipoIdEstudiante VARCHAR(20),
+    Nombre VARCHAR(20),
+    PrimerApellido VARCHAR(20),
+    SegundoApellido VARCHAR(20),
+    Telefono INT,
+    CorreoElectronico VARCHAR(20),
+    DireccionCasa VARCHAR(20),
+    PRIMARY KEY (IdEstudiante),
+    FOREIGN KEY(IdMatricula) REFERENCES MATRICULAS(IdMatricula)
+);
+
+
+INSERT INTO INSTRUCTORES(NDocumento, Nombre, PrimerApellido, SegundoApellido, Telefono, CorreoElectronico, DireccionCasa)
+VALUES
+	(11111111, "Julian", "Garnica", "Castillo", 3129459011, "test1@gmail.com", "Carrear1231"),
+    (11111112, "Pedro", "Sanchez", "Gutierrez", 3129459012, "test2@gmail.com", "Carrear1232"),
+    (11111113, "Hector", "Jimenez", "Vega", 3129459013, "test3@gmail.com", "Carrear1233"),
+    (11111114, "Mariana", "Valenzuela", "Mican", 3129459014, "test4@gmail.com", "Carrear1234"),
+    (11111115, "Julian", "Cleo", "Diestro", 3129459015, "test5@gmail.com", "Carrear1235"),
+    (11111116, "Luis", "Panchio", "Rigoberto", 3129459016, "test6@gmail.com", "Carrear1236"),
+    (11111117, "Durán", "Pedro", "Nosé xd", 3129459017, "test7@gmail.com", "Carrear1237"),
+    (11111118, "Mariano", "Tibatá", "Rodriguez", 3129459018, "test8@gmail.com", "Carrear1238");
+
+INSERT INTO CURSOSOFERTADOS(Nombre, Descripcion, CostoCreditos, DuracionSemanas)
+VALUES
+	("Programación Básica","Curso piola de programación",3,10),
+    ("Base de datos Masivas","Curso completo de base de datos",2,10),
+    ("Prácticas de responsabilidad social","Es una materia inútil que sólo la UNIMINUTO deja como obligatoria y cobran 3 créditos como si de verdad fuera importante",3,10),
+    ("Programación Web","Lo mismo de programación pero WEB",2,10),
+    ("Metodología de Investigación","Me daba sueño la clase pero sí es útil",1,10),
+    ("Sistemas transaccionales","Curso bastante interesante",3,10),
+    ("Ingeniería de Software","Curso VITALICIO para la carrera",3,10),
+    ("Base de Datos","Lo mismo que Masivas pero sin la palabra Masivas",2,10);
+    
+ INSERT INTO CURSOSDICTADOS(IdProfesorAsignado, IdCursosOfertados, FechaInicio, FechaFin, HoraInicio, HoraFin)
+ VALUES
+ 	(4,2,"2023-01-01","2023-07-01", 13, 15),
+    (2,7,"2023-01-01","2023-07-01", 12, 13),
+    (1,1,"2023-01-01","2023-07-01", 14, 15),
+    (7,8,"2023-01-01","2023-07-01", 6, 8),
+    (8,3,"2023-01-01","2023-07-01", 9, 11),
+    (2,6,"2023-01-01","2023-07-01", 15, 16),
+    (5,4,"2023-01-01","2023-07-01", 11, 13),
+    (6,5,"2023-01-01","2023-07-01", 18, 19);
+ 
+ INSERT INTO MATRICULAS(IdCursoDictado, FechaMatricula, PagoMatricula, FormaPagoMatricula) 
+ VALUES
+ 	(2, "2022-12-11", "2022-12-01", "Crédito"),
+    (4, "2022-12-12", "2022-12-02", "Contado"),
+    (1, "2022-12-13", "2022-12-03", "Crédito"),
+    (3, "2022-12-14", "2022-12-04", "PSE"),
+    (6, "2022-12-15", "2022-12-05", "Crédito"),
+    (5, "2022-12-16", "2022-12-06", "PSE"),
+    (7, "2022-12-17", "2022-12-07", "Contado"),
+    (8, "2022-12-18", "2022-12-08", "Crédito");
+ 
+ INSERT INTO ESTUDIANTES(IdMatricula, TipoIdEstudiante, Nombre, PrimerApellido, SegundoApellido, Telefono, CorreoElectronico, DireccionCasa)
+ VALUES
+ 	(5, "Cédula", "Julián", "Ramirez", "Sanchez", 3125236891, "test1@gmail.com", "carrrera 111"),
+    (2, "Cédula", "Mariana", "Jimenez", "Sanchez", 3125236892, "test2@gmail.com", "carrrera 112"),
+    (6, "Cédula", "Laura", "Vega", "Rodriguez", 3125236893, "test3@gmail.com", "carrrera 113"),
+    (1, "Cédula", "Paula", "Peña", "Alarcón", 3125236894, "test4@gmail.com", "carrrera 114"),
+    (1, "Cédula", "Juan", "Ramirez", "Garnica", 3125236895, "test5@gmail.com", "carrrera 115"),
+    (7, "Cédula", "Vegeta", "Goku", "Pichichincha", 3125236896, "test6@gmail.com", "carrrera 116"),
+    (3, "Cédula", "Héctor", "Ramirez", "Piroberto", 3125236897, "test7@gmail.com", "carrrera 117"),
+    (3, "Cédula", "Pincho", "Salas", "Salinas", 3125236898, "test8@gmail.com", "carrrera 118");
