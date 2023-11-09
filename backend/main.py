@@ -98,7 +98,7 @@ def deleteFichasMedicas():
     cursor = bdObject.createCursor()
         
     if 'id' in request.args:
-      idQuery = str(request.args.get("id"))
+      idQuery = int(request.args.get("id"))
       cursor.execute(querys.deleteUniqueFichaMedica, (idQuery,))
       
     connection.commit()

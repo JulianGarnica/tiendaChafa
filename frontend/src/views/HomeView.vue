@@ -86,9 +86,10 @@ export default {
     },
 
     deleteItemConfirm: function () {
-      deleteFichaMedica(this.idSelected).then((response) => {});
+      deleteFichaMedica(this.idSelected).then((response) => {this.getData();});
+
       this.dialogDelete = false;
-      this.getData();
+
     },
 
     closeDelete: function () {

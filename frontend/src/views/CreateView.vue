@@ -47,7 +47,7 @@ export default {
     enviarData: function () {
       console.log(this.formData);
       insertFichaMedica(this.formData).then((response) => {
-        console.log(response.data);
+        this.$router.push("/")
       });
     },
     reset: function () {
