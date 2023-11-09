@@ -1,241 +1,103 @@
 <template>
   <MiddleBox class="shadowHover centerDiv">
-    {{ formData }}
-    <v-form v-model="formValid" @submit.prevent>
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="12">
-            <h1>Ficha médica</h1>
-          </v-col>
 
-          <v-col cols="12" md="4">
-            <v-text-field
-              :rules="rules"
-              :counter="10"
-              label="Nombre"
-              v-model="formData.nombre"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-text-field
-              :rules="rules"
-              :counter="10"
-              label="Apellido"
-              v-model="formData.apellido"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-text-field
-              :rules="rules"
-              :counter="3"
-              type="number"
-              label="Edad"
-              v-model="formData.edad"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-select
-              :rules="rules"
-              :items="itemsSexo"
-              label="Sexo"
-              v-model="formData.sexo"
-              required
-            ></v-select>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-text-field
-              :rules="rules"
-              label="correo"
-              v-model="formData.correo"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-text-field
-              :rules="rules"
-              :counter="10"
-              label="Teléfono"
-              v-model="formData.telefono"
-              type="number"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="12">
-            <v-container fluid>
-              <v-radio-group v-model="formData.sistemaSalud" :rules="rules" >
-                <template>
-                  <div>Sistema de salud</div>
-                </template>
-                <v-radio value="Isapre">
-                  <template v-slot:label>
-                    <div>Isapre</div>
-                  </template>
-                </v-radio>
-                <v-radio value="Fonasa">
-                  <template v-slot:label>
-                    <div>Fonasa</div>
-                  </template>
-                </v-radio>
-                <v-radio value="Particular">
-                  <template v-slot:label>
-                    <div>Particular</div>
-                  </template>
-                </v-radio>
-                <v-radio value="Fuerzas Armadas">
-                  <template v-slot:label>
-                    <div>Fuerzas Armadas</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-            </v-container>
-          </v-col>
-
-          <v-col cols="12" md="12">
-            <v-container fluid>
-              <template>
-                <div style="text-align: left">Es alérgico a</div>
-              </template>
-              <v-checkbox v-model="formData.medicamentos">
-                <template v-slot:label>
-                  <div>Medicamentos</div>
-                </template>
-              </v-checkbox>
-              <v-checkbox v-model="formData.alimentos">
-                <template v-slot:label>
-                  <div>Alimentos</div>
-                </template>
-              </v-checkbox>
-              <v-checkbox v-model="formData.pastilas">
-                <template v-slot:label>
-                  <div>Pastillas</div>
-                </template>
-              </v-checkbox>
-              <v-checkbox v-model="formData.otros">
-                <template v-slot:label>
-                  <div>Otros</div>
-                </template>
-              </v-checkbox>
-            </v-container>
-          </v-col>
-
-          <v-col cols="12" md="12">
-            <v-container fluid>
-              <v-radio-group row v-model="formData.grupoSanguineo" :rules="rules">
-                <template v-slot:label>
-                  <div>Grupo sanguíneo</div>
-                </template>
-                <v-radio value="A+">
-                  <template v-slot:label>
-                    <div>A+</div>
-                  </template>
-                </v-radio>
-                <v-radio value="A-">
-                  <template v-slot:label>
-                    <div>A-</div>
-                  </template>
-                </v-radio>
-                <v-radio value="B+">
-                  <template v-slot:label>
-                    <div>B+</div>
-                  </template>
-                </v-radio>
-                <v-radio value="B-">
-                  <template v-slot:label>
-                    <div>B-</div>
-                  </template>
-                </v-radio>
-                <v-radio value="AB+">
-                  <template v-slot:label>
-                    <div>AB+</div>
-                  </template>
-                </v-radio>
-                <v-radio value="AB-">
-                  <template v-slot:label>
-                    <div>AB-</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-            </v-container>
-          </v-col>
-
-          <v-col cols="12" md="12">
-            <v-textarea name="input-7-1" v-model="formData.Observaciones"  label="Observaciones"></v-textarea>
-          </v-col>
-          <v-col cols="12" md="12">
-            <v-checkbox :rules="rules">
-              <template v-slot:label>
-                <div>Aceptar los términos y condiciones</div>
-              </template>
-            </v-checkbox>
-          </v-col>
-
-
-          <v-col cols="12" md="12">
-            <v-btn
-              color="success"
-              class="mr-4"
-              type="submit"
-              :disabled="!formValid"
-            >
-              Registrar
-            </v-btn>
-
-            <v-btn color="error" class="mr-4" @click="reset"> Limpiar </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+    <h1>Registros de ficha médicas</h1>
+    <router-link :to="'/crearFichaMedica'">
+      <v-btn class="mx-2" fab dark large color="cyan">
+        <v-icon dark> mdi-plus </v-icon>
+      </v-btn>
+    </router-link>
+    <v-data-table
+      :headers="headers"
+      :items="dataResponse"
+      :search="search"
+      :items-per-page="30"
+      class="elevation-1"
+    >
+      <template v-slot:item.actions="{ item }">
+        <v-btn class="mx-2" fab dark small color="cyan" @click="editItem(item)"
+          ><v-icon small> mdi-pencil </v-icon></v-btn
+        >
+        <v-btn
+          class="mx-2"
+          fab
+          dark
+          small
+          color="error"
+          @click="deleteItem(item)"
+          ><v-icon small> mdi-delete </v-icon></v-btn
+        >
+      </template>
+    </v-data-table>
+    <v-dialog v-model="dialogDelete" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h6" style="text-align: center"
+          >¿Estás seguro/a de eliminar este item?</v-card-title
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+            >OK</v-btn
+          >
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </MiddleBox>
 </template>
 
 <script>
 import MiddleBox from "../components/static/MiddleBox.vue";
+import { getFichasMedicas, deleteFichaMedica } from "../api";
+
 export default {
   name: "HomeView",
   components: {
     MiddleBox,
   },
   data: () => ({
-    itemsSexo: [
-      "Masculino",
-      "Femenino",
-      "Transformer",
-      "No sé",
-      "Venezolano",
-      "Otro",
+    headers: [
+      { text: "Nombre", align: "start", value: "nombre" },
+      { text: "Apellido", value: "apellido" },
+      { text: "Correo", value: "correo" },
+      { text: "Sexo", value: "sexo" },
+      { text: "Acciones", value: "actions", sortable: false },
     ],
-    formValid: false,
-    formData: {
-      nombre: "",
-      apellido: "",
-      edad: "",
-      sexo: "",
-      correo: "",
-      telefono: "",
-      sistemaSalud: "",
-      medicamentos: false,
-      alimentos: false,
-      pastillas: false,
-      otros: false,
-      grupoSanguineo: "",
-      Observaciones: "",
-    },
-    rules: [
-        value => {
-          if (value) return true
-
-          return 'Este campo es obligatorio'
-        },
-      ],
+    dataResponse: [],
+    search: "",
+    idSelected: 0,
+    dialogDelete: false,
   }),
+  methods: {
+    getData: function () {
+      getFichasMedicas().then((response) => {
+        this.dataResponse = response.data;
+      });
+    },
+    editItem: function (item) {
+      this.$router
+        .push({ path: "/editarFichaMedica/" + item.id })
+        .catch(() => {});
+    },
+    deleteItem: function (item) {
+      this.idSelected = item.id;
+      this.dialogDelete = true;
+    },
+
+    deleteItemConfirm: function () {
+      deleteFichaMedica(this.idSelected).then((response) => {});
+      this.dialogDelete = false;
+      this.getData();
+    },
+
+    closeDelete: function () {
+      this.dialogDelete = false;
+    },
+  },
+  mounted() {
+    this.getData();
+  },
 };
 </script>
 
@@ -245,6 +107,6 @@ export default {
 }
 
 .centerDiv {
-  margin: 0 auto;
+  margin: 50px !important;
 }
 </style>

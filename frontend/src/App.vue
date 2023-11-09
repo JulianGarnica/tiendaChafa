@@ -179,15 +179,4 @@ input[input] {
   opacity: 0;
 }
 
-.v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td{
-  font-size: 13px !important;
-  height: 0px !important;
-  padding: 0 13px !important;
-  cursor: pointer;
-}
-
-.v-data-table > .v-data-table__wrapper .v-data-table__mobile-row {
-    height: initial;
-    min-height: 25px !important;
-}
 </style>

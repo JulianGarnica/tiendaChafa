@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import CreateView from '../views/CreateView.vue'
+import EditView from '../views/EditView.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/crearFichaMedica',
+    name: 'Crear Ficha Médica',
+    component: CreateView
+  },
+  {
+    path: '/editarFichaMedica/:id',
+    name: 'Editar Ficha Médica',
+    component: EditView
   }
 ]
 
