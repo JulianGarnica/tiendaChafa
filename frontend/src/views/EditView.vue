@@ -3,7 +3,7 @@
     <formFichaMedica
       @enviarData="enviarData"
       :formData="formData"
-      titulo="Actualizar Ficha Médica"
+      titulo="Actualizar Producto"
       :limpiar="false"
     >
       <router-link :to="'/'">

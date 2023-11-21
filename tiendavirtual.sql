@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2023 a las 03:28:01
+-- Tiempo de generación: 21-11-2023 a las 03:48:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,38 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `centromedico`
+-- Base de datos: `tiendavirtual`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `fichamedica`
+-- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `fichamedica` (
+CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
-  `apellido` text NOT NULL,
-  `edad` int(11) NOT NULL,
-  `sexo` text NOT NULL,
-  `correo` text NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `sistemaSalud` text NOT NULL,
-  `medicamentos` tinyint(1) NOT NULL,
-  `alimentos` tinyint(1) NOT NULL,
-  `pastillas` tinyint(1) NOT NULL,
-  `otros` tinyint(1) NOT NULL,
-  `grupoSanguineo` text NOT NULL,
-  `observaciones` longtext NOT NULL
+  `descripcion` longtext NOT NULL,
+  `costo` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `fichamedica`
+-- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `fichamedica` (`id`, `nombre`, `apellido`, `edad`, `sexo`, `correo`, `telefono`, `sistemaSalud`, `medicamentos`, `alimentos`, `pastillas`, `otros`, `grupoSanguineo`, `observaciones`) VALUES
-(7, 'Julián', '1234', 12, 'Femenino', '12312', 41241, 'Fuerzas Armadas', 0, 1, 1, 0, 'AB-', 'r23q12');
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `costo`, `cantidad`) VALUES
+(2, 'RTX 4090', 'Test 123', 300000, 78);
 
 -- --------------------------------------------------------
 
@@ -70,17 +61,16 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `password`, `createdOn`) VALUES
-(2, 'Julián 213', 'agujadoctor@gmail.com', '123', '2023-11-21 01:54:04'),
-(3, 'test 123', 'test123@test123.com', '123', '2023-11-21 02:24:46');
+(2, 'Julián 213', 'agujadoctor@gmail.com', '123', '2023-11-21 01:54:04');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `fichamedica`
+-- Indices de la tabla `productos`
 --
-ALTER TABLE `fichamedica`
+ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -94,10 +84,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `fichamedica`
+-- AUTO_INCREMENT de la tabla `productos`
 --
-ALTER TABLE `fichamedica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

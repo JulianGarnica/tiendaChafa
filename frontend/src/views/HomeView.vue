@@ -1,8 +1,8 @@
 <template>
   <FullBoxVue class="shadowHover centerDiv">
 
-    <h1>Registros de ficha médicas</h1>
-    <router-link :to="'/crearFichaMedica'">
+    <h1>Registros de productos piola</h1>
+    <router-link :to="'/crearProductos'">
       <v-btn class="mx-2" fab dark large color="cyan">
         <v-icon dark> mdi-plus </v-icon>
       </v-btn>
@@ -65,9 +65,9 @@ export default {
   data: () => ({
     headers: [
       { text: "Nombre", align: "start", value: "nombre" },
-      { text: "Apellido", value: "apellido" },
-      { text: "Correo", value: "correo" },
-      { text: "Sexo", value: "sexo" },
+      { text: "Descripción", value: "descripcion" },
+      { text: "Costo", value: "costo" },
+      { text: "Cantidad", value: "cantidad" },
       { text: "Acciones", value: "actions", sortable: false },
     ],
     dataResponse: [],
@@ -83,7 +83,7 @@ export default {
     },
     editItem: function (item) {
       this.$router
-        .push({ path: "/editarFichaMedica/" + item.id })
+        .push({ path: "/editarProductos/" + item.id })
         .catch(() => {});
     },
     deleteItem: function (item) {

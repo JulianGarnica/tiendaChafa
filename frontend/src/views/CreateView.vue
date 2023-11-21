@@ -3,7 +3,7 @@
     <formFichaMedica
       @enviarData="enviarData"
       :formData="formData"
-      titulo="Crear Ficha Médica"
+      titulo="Crear Producto"
       :limpiar="true"
     >
       <router-link :to="'/'">
@@ -29,18 +29,9 @@ export default {
   data: () => ({
     formData: {
       nombre: "",
-      apellido: "",
-      edad: "",
-      sexo: "",
-      correo: "",
-      telefono: "",
-      sistemaSalud: "",
-      medicamentos: false,
-      alimentos: false,
-      pastillas: false,
-      otros: false,
-      grupoSanguineo: "",
-      observaciones: "",
+      descripcion: "",
+      costo: 0,
+      cantidad: 0,
     },
   }),
   methods: {

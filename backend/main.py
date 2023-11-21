@@ -20,20 +20,11 @@ def crearFichaMedica():
   cuerpoConsulta = request.get_json()
   
   nombre = cuerpoConsulta['nombre']
-  apellido = cuerpoConsulta['apellido']
-  edad = cuerpoConsulta['edad']
-  sexo = cuerpoConsulta['sexo']
-  correo = cuerpoConsulta['correo']
-  telefono = cuerpoConsulta['telefono']
-  sistemaSalud = cuerpoConsulta['sistemaSalud']
-  medicamentos = cuerpoConsulta['medicamentos']
-  alimentos = cuerpoConsulta['alimentos']
-  pastillas = cuerpoConsulta['pastillas']
-  otros = cuerpoConsulta['otros']
-  grupoSanguineo = cuerpoConsulta['grupoSanguineo']
-  observaciones = cuerpoConsulta['observaciones']
+  descripcion = cuerpoConsulta['descripcion']
+  costo = cuerpoConsulta['costo']
+  cantidad = cuerpoConsulta['cantidad']
   
-  data = (nombre, apellido, edad, sexo, correo, telefono, sistemaSalud, medicamentos, alimentos, pastillas, otros, grupoSanguineo, observaciones)
+  data = (nombre, descripcion, costo, cantidad)
   cursor.execute(querys.insertFichaMedica, data)
   
   connection.commit()
@@ -50,20 +41,11 @@ def actualizarFichaMedica():
   
   idFicha = str(cuerpoConsulta['id'])
   nombre = cuerpoConsulta['nombre']
-  apellido = cuerpoConsulta['apellido']
-  edad = cuerpoConsulta['edad']
-  sexo = cuerpoConsulta['sexo']
-  correo = cuerpoConsulta['correo']
-  telefono = cuerpoConsulta['telefono']
-  sistemaSalud = cuerpoConsulta['sistemaSalud']
-  medicamentos = cuerpoConsulta['medicamentos']
-  alimentos = cuerpoConsulta['alimentos']
-  pastillas = cuerpoConsulta['pastillas']
-  otros = cuerpoConsulta['otros']
-  grupoSanguineo = cuerpoConsulta['grupoSanguineo']
-  observaciones = cuerpoConsulta['observaciones']
+  descripcion = cuerpoConsulta['descripcion']
+  costo = cuerpoConsulta['costo']
+  cantidad = cuerpoConsulta['cantidad']
   
-  data = (nombre, apellido, edad, sexo, correo, telefono, sistemaSalud, medicamentos, alimentos, pastillas, otros, grupoSanguineo, observaciones, idFicha)
+  data = (nombre, descripcion, costo, cantidad, idFicha)
   cursor.execute(querys.updateFichaMedica, data)
   
   connection.commit()

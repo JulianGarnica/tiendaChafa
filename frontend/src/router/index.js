@@ -16,12 +16,12 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/crearFichaMedica',
+    path: '/crearProductos',
     name: 'Crear Ficha Médica',
     component: CreateView
   },
   {
-    path: '/editarFichaMedica/:id',
+    path: '/editarProductos/:id',
     name: 'Editar Ficha Médica',
     component: EditView
   }
