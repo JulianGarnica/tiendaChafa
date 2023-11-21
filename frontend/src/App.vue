@@ -1,31 +1,78 @@
 <template>
-  <v-app>
+  <v-app v-if="validUser">
     <div class="content">
       <FullBoxVue class="shadowHover" v-show="loading">
-      <loadingCSS > Cargando... </loadingCSS>
-    </FullBoxVue>
-    <br>
+        <loadingCSS> Cargando... </loadingCSS>
+      </FullBoxVue>
+      <v-btn class="mx-2" dark large color="cyan" @click="cerrarSesion()">
+        Cerrar sesión
+      </v-btn>
       <router-view v-show="!loading" v-slot="{ Component }">
         <transition name="fade">
-
-          <component  :is="Component" />
-
+          <component :is="Component" />
         </transition>
       </router-view>
-      <br>
     </div>
-    <p style="display:none">Versión 1.1</p>
+    <p style="display: none">Versión 1.1</p>
   </v-app>
 
+  <v-app v-else-if="$route.matched[0].path == '/candidatoUpload/:id'">
+    <router-view v-show="!loading" v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+    <FullBoxVue class="shadowHover" v-show="loading">
+      <v-img
+        :src="require('./assets/logo.png')"
+        class="my-3"
+        contain
+        height="100"
+      />
+      <loadingCSS> Cargando... </loadingCSS>
+    </FullBoxVue>
+    <p style="display: none">Versión 1.1</p>
+  </v-app>
+  <v-app v-else-if="$route.matched[0].path == '/restorePassword'">
+    <RestorePassword v-show="!loading"></RestorePassword>
+    <FullBoxVue class="shadowHover" v-show="loading">
+      <v-img
+        :src="require('./assets/logo.png')"
+        class="my-3"
+        contain
+        height="100"
+      />
+      <loadingCSS> Cargando... </loadingCSS>
+    </FullBoxVue>
+    <p style="display: none">Versión 1.1</p>
+  </v-app>
+  <v-app class="NoMenuContent" v-else>
+    <Login class="Login" />
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="svgBackground"
+      viewBox="0 0 1440 320"
+    >
+      <path
+        fill="#385DA6"
+        fill-opacity="1"
+        d="M0,64L48,101.3C96,139,192,213,288,224C384,235,480,181,576,149.3C672,117,768,107,864,133.3C960,160,1056,224,1152,234.7C1248,245,1344,203,1392,181.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      ></path>
+    </svg>
+    <p style="display: none">Versión 1.1</p>
+  </v-app>
 </template>
 
 <script>
 import FullBoxVue from "./components/static/FullBox.vue";
 import Login from "./components/static/Login.vue";
 import RestorePassword from "./components/static/RestorePassword.vue";
+import Menu from "./components/static/Menu.vue";
+import { infoUser } from "./api";
 import axios from "axios";
 import loadingCSS from "./components/static/loadingCSS.vue";
-import packageJson from '../package.json';
+import packageJson from "../package.json";
 
 export default {
   name: "App",
@@ -34,14 +81,32 @@ export default {
     loading: false,
   }),
   components: {
+    Menu,
     Login,
     RestorePassword,
     loadingCSS,
-    FullBoxVue
+    FullBoxVue,
   },
   methods: {
+    validLogin() {
+      if (localStorage.getItem("userTkn") === null) {
+        this.validUser = false;
+      } else {
+        this.validUser = true;
+      }
+    },
+    cerrarSesion() {
+      localStorage.removeItem("userTkn")
+      window.location.reload();
+    }
   },
   mounted: function () {
+    this.validLogin();
+    const appVersion = packageJson.version;
+    if (appVersion !== localStorage.getItem("appVersion")) {
+      localStorage.setItem("appVersion", appVersion);
+      window.location.reload();
+    }
   },
 
   watch: {
@@ -74,6 +139,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");

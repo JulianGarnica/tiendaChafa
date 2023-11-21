@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 import querys
 import bd
+import json
 
 app = Flask ( __name__ )
 CORS(app)
@@ -47,7 +48,7 @@ def actualizarFichaMedica():
   
   cuerpoConsulta = request.get_json()
   
-  idFicha = cuerpoConsulta['id']
+  idFicha = str(cuerpoConsulta['id'])
   nombre = cuerpoConsulta['nombre']
   apellido = cuerpoConsulta['apellido']
   edad = cuerpoConsulta['edad']
@@ -105,5 +106,102 @@ def deleteFichasMedicas():
     bdObject.closeConnection()
   finally:
     return response
+  
+#  Auth EndPoints
+
+@app.route ( f"{apiName}/register", methods = ['POST'] )
+def registerUser():
+  connection = bdObject.createConnection()
+  cursor = bdObject.createCursor()
+  
+  cuerpoConsulta = request.get_json()
+  
+  nombre = cuerpoConsulta['nombre']
+  correo = cuerpoConsulta['correo']
+  password = cuerpoConsulta['password']
+  
+  data = (nombre, correo, password)
+  cursor.execute(querys.insertUser, data)
+  
+  connection.commit()
+  bdObject.closeConnection()
+
+  return "Ok!"  
+
+@app.route ( f"{apiName}/getUsuarios", methods = ['GET'] )
+def getUsuarios():
+  connection = bdObject.createConnection()
+  cursor = bdObject.createCursor()
+  
+  response = None
+  
+  if 'id' in request.args:
+    idQuery = str(request.args.get("id"))
+    cursor.execute(querys.getUniqueUser, (idQuery,))
+    response = bdObject.returnQuery(cursor)
+    
+  else:
+    cursor.execute(querys.getAllUsers)
+    response = bdObject.returnQuery(cursor)
+    
+  connection.commit()
+  bdObject.closeConnection()
+  return response
+
+@app.route ( f"{apiName}/updateUser", methods = ['POST'] )
+def updateUser():
+  connection = bdObject.createConnection()
+  cursor = bdObject.createCursor()
+  
+  cuerpoConsulta = request.get_json()
+  
+  idFicha = str(cuerpoConsulta['id'])
+  nombre = cuerpoConsulta['nombre']
+  correo = cuerpoConsulta['correo']
+  
+  data = (nombre, correo, idFicha)
+  cursor.execute(querys.updateUser, data)
+  
+  connection.commit()
+  bdObject.closeConnection()
+
+  return "Ok!"
+
+
+@app.route ( f"{apiName}/deleteUsuario", methods = ['GET'] )
+def deleteUsuario():
+  response = "Ok!"
+  try:
+    connection = bdObject.createConnection()
+    cursor = bdObject.createCursor()
+        
+    if 'id' in request.args:
+      idQuery = str(request.args.get("id"))
+      cursor.execute(querys.deleteUsuario, (idQuery,))
+      
+    connection.commit()
+    bdObject.closeConnection()
+  finally:
+    return response
+
+@app.route ( f"{apiName}/login", methods = ['POST'] )
+def login():
+  connection = bdObject.createConnection()
+  cursor = bdObject.createCursor()
+  
+  cuerpoConsulta = request.get_json()
+  
+  correo = cuerpoConsulta['user']
+  password = cuerpoConsulta['password']
+  
+  data = (correo, password)
+  cursor.execute(querys.getLogin, data)
+  response = bdObject.returnQuery(cursor)
+  
+  
+  connection.commit()
+  bdObject.closeConnection()
+
+  return response
 
 app.run(debug=True)

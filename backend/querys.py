@@ -5,3 +5,12 @@ updateFichaMedica = "UPDATE fichamedica SET nombre=%s, apellido=%s, edad=%s, sex
 getAllFichaMedica = "SELECT id, nombre, apellido, correo, sexo FROM fichamedica"
 getUniqueFichaMedica = "SELECT * FROM fichamedica WHERE id=%s"
 deleteUniqueFichaMedica = "DELETE FROM fichamedica WHERE id=%s"
+
+
+insertUser = "INSERT INTO usuarios(nombre, correo, password) VALUES (%s, %s, %s)"
+getUniqueUser = "SELECT id, nombre, correo, createdOn FROM usuarios WHERE id=%s"
+updateUser = "UPDATE usuarios SET nombre=%s, correo=%s WHERE id=%s"
+getAllUsers = "SELECT id, nombre, correo, createdOn AS creadoEl FROM usuarios"
+deleteUsuario = "DELETE FROM usuarios WHERE id=%s"
+
+getLogin = "SELECT COUNT(id) AS cantidad FROM usuarios WHERE correo=%s AND password=%s"

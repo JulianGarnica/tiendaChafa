@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2023 a las 06:04:25
+-- Tiempo de generación: 21-11-2023 a las 03:28:01
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -45,6 +45,35 @@ CREATE TABLE `fichamedica` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `fichamedica`
+--
+
+INSERT INTO `fichamedica` (`id`, `nombre`, `apellido`, `edad`, `sexo`, `correo`, `telefono`, `sistemaSalud`, `medicamentos`, `alimentos`, `pastillas`, `otros`, `grupoSanguineo`, `observaciones`) VALUES
+(7, 'Julián', '1234', 12, 'Femenino', '12312', 41241, 'Fuerzas Armadas', 0, 1, 1, 0, 'AB-', 'r23q12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `correo` text NOT NULL,
+  `password` varchar(11) NOT NULL,
+  `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `password`, `createdOn`) VALUES
+(2, 'Julián 213', 'agujadoctor@gmail.com', '123', '2023-11-21 01:54:04'),
+(3, 'test 123', 'test123@test123.com', '123', '2023-11-21 02:24:46');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -55,6 +84,12 @@ ALTER TABLE `fichamedica`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -62,7 +97,13 @@ ALTER TABLE `fichamedica`
 -- AUTO_INCREMENT de la tabla `fichamedica`
 --
 ALTER TABLE `fichamedica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

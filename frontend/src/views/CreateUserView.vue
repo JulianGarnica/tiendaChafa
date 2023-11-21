@@ -1,52 +1,42 @@
 <template>
   <div>
-    <formFichaMedica
+    <formUser
       @enviarData="enviarData"
       :formData="formData"
-      titulo="Crear Ficha Médica"
+      titulo="Crear Usuario"
       :limpiar="true"
     >
-      <router-link :to="'/'">
+      <router-link :to="'/usuarios'">
         <v-btn class="mx-2" fab dark large color="cyan">
           <v-icon dark> mdi-keyboard-return </v-icon>
         </v-btn>
-      </router-link></formFichaMedica
+      </router-link></formUser
     >
   </div>
 </template>
 
 <script>
-import FullBoxVue from "../components/static/FullBox.vue";
-import formFichaMedica from "@/components/formFichaMedica.vue";
-import { insertFichaMedica } from "../api";
+import MiddleBox from "../components/static/MiddleBox.vue";
+import formUser from "@/components/formUser.vue";
+import { insertUser } from "../api";
 
 export default {
   name: "HomeView",
   components: {
-    FullBoxVue,
-    formFichaMedica,
+    MiddleBox,
+    formUser,
   },
   data: () => ({
     formData: {
       nombre: "",
-      apellido: "",
-      edad: "",
-      sexo: "",
       correo: "",
-      telefono: "",
-      sistemaSalud: "",
-      medicamentos: false,
-      alimentos: false,
-      pastillas: false,
-      otros: false,
-      grupoSanguineo: "",
-      observaciones: "",
+      password: "",
     },
   }),
   methods: {
     enviarData: function () {
       console.log(this.formData);
-      insertFichaMedica(this.formData).then((response) => {
+      insertUser(this.formData).then((response) => {
         console.log(response.data);
       });
     },

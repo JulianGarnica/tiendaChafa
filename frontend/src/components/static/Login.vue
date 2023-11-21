@@ -1,8 +1,5 @@
 <template>
   <div class="mx-auto my-12 ">
-    <div class="logoEmpresaLogin shadowHover">
-      <v-img width="100%" src="@/assets/logo.png"></v-img>
-    </div>
 
     <v-card :loading="loading" width="374" outlined class="cardLogin shadowHover">
       <template slot="progress">
@@ -118,8 +115,8 @@ export default {
         })
           .then(
             function (response) {
-              if (response.data[0].status == 1) {
-                localStorage.setItem("userTkn", response.data[1].jwt);
+              if (response.data[0].cantidad == 1) {
+                localStorage.setItem("userTkn", true);
                 this.$router.push({ path: '/'}).catch(()=>{});
                 window.location.reload();
               } else {

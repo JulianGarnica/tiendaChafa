@@ -1,18 +1,19 @@
 <template>
   <FullBoxVue class="shadowHover centerDiv">
 
-    <h1>Registros de ficha médicas</h1>
-    <router-link :to="'/crearFichaMedica'">
+    <h1>Usuarios en la plataforma</h1>
+
+    <router-link :to="'/crearUsuarios'">
       <v-btn class="mx-2" fab dark large color="cyan">
         <v-icon dark> mdi-plus </v-icon>
       </v-btn>
     </router-link>
-
-    <router-link :to="'/usuarios'">
+    <router-link :to="'/'">
       <v-btn class="mx-2" dark large color="cyan">
-        Usuarios
+        Inicio
       </v-btn>
     </router-link>
+
     <v-data-table
       :headers="headers"
       :items="dataResponse"
@@ -55,7 +56,7 @@
 
 <script>
 import FullBoxVue from "../components/static/FullBox.vue";
-import { getFichasMedicas, deleteFichaMedica } from "../api";
+import { getUsuarios, deleteUsuario } from "../api";
 
 export default {
   name: "HomeView",
@@ -65,9 +66,7 @@ export default {
   data: () => ({
     headers: [
       { text: "Nombre", align: "start", value: "nombre" },
-      { text: "Apellido", value: "apellido" },
       { text: "Correo", value: "correo" },
-      { text: "Sexo", value: "sexo" },
       { text: "Acciones", value: "actions", sortable: false },
     ],
     dataResponse: [],
@@ -77,13 +76,13 @@ export default {
   }),
   methods: {
     getData: function () {
-      getFichasMedicas().then((response) => {
+      getUsuarios().then((response) => {
         this.dataResponse = response.data;
       });
     },
     editItem: function (item) {
       this.$router
-        .push({ path: "/editarFichaMedica/" + item.id })
+        .push({ path: "/editarUsuario/" + item.id })
         .catch(() => {});
     },
     deleteItem: function (item) {
@@ -92,7 +91,7 @@ export default {
     },
 
     deleteItemConfirm: function () {
-      deleteFichaMedica(this.idSelected).then((response) => {});
+      deleteUsuario(this.idSelected).then((response) => {});
       this.dialogDelete = false;
       this.getData();
     },

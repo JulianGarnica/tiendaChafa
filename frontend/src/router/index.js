@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CreateView from '../views/CreateView.vue'
 import EditView from '../views/EditView.vue'
+import usuariosView from '../views/usuariosView.vue'
+import CreateUserView from '../views/CreateUserView.vue'
+import EditarUsuario from '../views/EditarUsuario.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +24,22 @@ const routes = [
     path: '/editarFichaMedica/:id',
     name: 'Editar Ficha Médica',
     component: EditView
+  }
+  ,
+  {
+    path: '/usuarios',
+    name: 'Usuarios',
+    component: usuariosView
+  },
+  {
+    path: '/crearUsuarios',
+    name: 'Usuarios',
+    component: CreateUserView
+  },
+  {
+    path: '/editarUsuario/:id',
+    name: 'Usuarios',
+    component: EditarUsuario
   }
 ]
 

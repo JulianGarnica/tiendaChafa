@@ -1,30 +1,30 @@
 <template>
   <div>
-    <formFichaMedica
+    <formUser
       @enviarData="enviarData"
       :formData="formData"
-      titulo="Actualizar Ficha Médica"
+      titulo="Actualizar Usuario"
       :limpiar="false"
     >
-      <router-link :to="'/'">
+      <router-link :to="'/usuarios'">
         <v-btn class="mx-2" fab dark large color="cyan">
           <v-icon dark> mdi-keyboard-return </v-icon>
         </v-btn>
       </router-link>
-    </formFichaMedica>
+    </formUser>
   </div>
 </template>
 
 <script>
 import FullBoxVue from "../components/static/FullBox.vue";
-import formFichaMedica from "@/components/formFichaMedica.vue";
-import { getFichaMedica, updateFichaMedica } from "../api";
+import formUser from "@/components/formUser.vue";
+import { getUsuario, updateUser } from "../api";
 
 export default {
   name: "HomeView",
   components: {
     FullBoxVue,
-    formFichaMedica,
+    formUser,
   },
   data() {
     return {
@@ -32,29 +32,18 @@ export default {
       formData: {
         id: this.$route.params.id,
         nombre: "",
-        apellido: "",
-        edad: "",
-        sexo: "",
-        correo: "",
-        telefono: "",
-        sistemaSalud: "",
-        medicamentos: false,
-        alimentos: false,
-        pastillas: false,
-        otros: false,
-        grupoSanguineo: "",
-        observaciones: "",
+        correo: ""
       },
     };
   },
   methods: {
     getData: function () {
-      getFichaMedica(this.idSolicitud).then((response) => {
+      getUsuario(this.idSolicitud).then((response) => {
         this.formData = response.data[0];
       });
     },
     enviarData: function () {
-      updateFichaMedica(this.formData).then((response) => {});
+      updateUser(this.formData).then((response) => {});
     },
   },
   mounted() {
